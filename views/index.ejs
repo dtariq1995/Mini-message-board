@@ -1,0 +1,12 @@
+<!-- index.ejs -->
+<html>
+  <body>
+    <% messages.forEach((message) => { %>
+      <p><%= message.added %></p>
+      <p><strong><%= message.user %></strong>: <%= message.text %></p>
+    <% }); %>
+
+    <h2>Add a new message:</h2>
+    <%- include('form') %>
+  </body>
+</html>
