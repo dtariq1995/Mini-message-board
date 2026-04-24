@@ -1,7 +1,10 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const indexRouter = require("./routes/indexRouter");
-const newMessageRouter = require("./routes/newMessageRouter");
 const path = require("node:path");
 
 app.set("views", path.join(__dirname, "views"));
@@ -11,7 +14,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
-app.use("/new-message", newMessageRouter);
 
 const PORT = process.env.PORT || 3000;
 

@@ -1,4 +1,18 @@
-// Database module
-// Add database configuration and functions here
+const { Pool } = require("pg");
 
-module.exports = {};
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("DATABASE_URL is not defined");
+}
+
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+module.exports = {
+  query: (text, params) => pool.query(text, params)
+};
