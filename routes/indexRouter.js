@@ -4,7 +4,9 @@ const indexRouter = Router();
 
 indexRouter.get("/", async (req, res, next) => {
   try {
-    const result = await db.query("SELECT * FROM messages ORDER BY created_at DESC");
+    const result = await db.query(
+      "SELECT user_name AS user, text, created_at AS added FROM messages ORDER BY created_at DESC"
+    );
     res.render("index", { title: "Mini Messageboard", messages: result.rows });
   } catch (err) {
     next(err);
